@@ -17,8 +17,10 @@ def home(request):
             print("home")   
             return render(request, "app/base.html")
         else:
+            print(1)
             return redirect("/login")
     except:
+        print(2)
         return redirect("/login")
 
 
@@ -121,3 +123,5 @@ class Comment_request():
             info["user"]=user.user_id
             comment_list.append(info)
         return JsonResponse(comment_list, safe = False)
+def about(request):
+    return render(request,"app/about.html")

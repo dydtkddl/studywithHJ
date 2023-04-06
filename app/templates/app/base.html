@@ -1,178 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <title>스터디사이트</title>
+{% extends 'app/share.html' %}
+{% block content %}
     <style>
-    body {
-      background-color: #F1F1F1;
-      color: #333;
-      font-family: Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
-      margin: 0;
-      padding: 0;
-    }
+      .button_write {
+  display: inline-block;
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
 
-    header {
-      background-color: #4CAF50;
-      color: #FFF;
-      padding: 20px;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
-      line-height: 1.2;
-    }
-
-    nav {
-      background-color: #2E8B57;
-      color: #FFF;
-      padding: 10px;
-      text-align: center;
-    }
-
-    nav a {
-      color: #FFF;
-      font-weight: bold;
-      margin-right: 10px;
-      text-decoration: none;
-    }
-
-    nav a:hover {
-      text-decoration: underline;
-    }
-
-    .container {
-      margin: 0 auto;
-      max-width: 960px;
-      padding: 20px;
-    }
-
-    .post_list .post {
-      width: 95%;
-    }
-
-    .post_list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    .post {
-      background-color: #FFF;
-      border: 1px solid #CCC;
-      border-radius: 5px;
-      margin-bottom: 20px;
-      padding: 20px;
-      width: 30%;
-    }
-
-    .post h3 {
-      margin: 0 0 10px;
-      font-size: 1.8em;
-      line-height: 1.2;
-      color: #2c3e50;
-    }
-
-    .post span {
-      color: #95a5a6;
-      font-size: 14px;
-    }
-
-    .block {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #7bc98c;
-      padding-bottom: 20px;
-      width: 100%;
-    }
-
-    .block:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-    }
-
-    .block h3 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: bold;
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-
-    .block p {
-      margin: 0;
-      color: #95a5a6;
-      font-size: 14px;
-    }
+.button_write:hover {
+  background-color: #3e8e41;
+}
     </style>
-</head>
-
-<body>
-    <header>
-        <h1>Remind Today</h1>
-    </header>
-    <nav>
-        <a href="/home">Home</a>
-        <a href="#">About</a>
-        <a href="#">Contact</a>
-        <a href="/write">write!</a>
-        {% if request.session.user_id %} 
-        <a href = "/mypage">{{request.session.user_id}}</a>님 안녕하세요 
-        <a href="#" onclick = "logout()">로그아웃하기</a>
-        {% else %} 
-        <a href = "/signup">회원가입</a>
-        <a href="/login/">로그인</a>
-        {% endif %}
-    </nav>
+    <div style="width:500px;margin:0px auto;margin-top: 20px;">
+      <button style="width: 500px;"class="button_write" onclick="go_write('/write/')">
+        <i class="fa-solid fa-pen-nib"></i> 글 쓰러가기</button></div>
     <div class="container">
         <div class="post_list">
             
             </div>
         </div>
     </div>
-</body>
-<script>
-    const ajax = fetch("/read_article_json/").then(
-        (data) => data.json()
-    ).then(function (res) {
-        let code = ""
-        let target = document.getElementsByClassName("post_list")[0]
-        let date_list = res["date_list"]
-        let days_articles;
-        let sliced_res
-        for (date_ of date_list){
-            console.log(date_)
-            code += "<div class='post'><div class='block'>"
-            code += `<h3>${date_}</h3>`
-            days_articles = res[date_]
-            sliced_days_articles = days_articles.length >=10 ? days_articles.slice(0,10) : days_articles;
-            for (i of sliced_days_articles){
-                let date = i["date"];
-                let id = i["id"];
-                let title = i["title"];
-                let content = i["content"];
-                code += `<div onclick=move(${id}) class="post" >
-                        <h3>${title}</h3>
-                        <span><strong>${date}</strong></span>
-                        </div>`;
+    <script>
+        const ajax = fetch("/read_article_json/").then(
+            (data) => data.json()
+        ).then(function (res) {
+            let code = ""
+            let target = document.getElementsByClassName("post_list")[0]
+            let date_list = res["date_list"]
+            let days_articles;
+            let sliced_res
+            for (date_ of date_list){
+                console.log(date_)
+                code += "<div class='post'><div class='block'>"
+                code += `<h3>${date_}</h3>`
+                days_articles = res[date_]
+                sliced_days_articles = days_articles.length >=10 ? days_articles.slice(0,10) : days_articles;
+                for (i of sliced_days_articles){
+                    let date = i["date"];
+                    let id = i["id"];
+                    let title = i["title"];
+                    let content = i["content"];
+                    code += `<div onclick=move(${id}) class="post" >
+                            <h3>${title}</h3>
+                            <span><strong>${date}</strong></span>
+                            </div>`;
+                }
+                code += "</div></div>"
             }
-            code += "</div></div>"
+            target.innerHTML = code;
+           
+    
+        })
+        function go_write(url){
+          location.href = url
         }
-        target.innerHTML = code;
-       
-
-    })
-  
-    function move(id) {
-        location.href = `/read_article/?id=${id}`
-    }
-    function logout(){
-        const ajax = fetch("/logout/").then(response =>{location.href = "/home"});
-        
-    }
-</script>
+        function move(id) {
+            location.href = `/read_article/?id=${id}`
+        }
+        function logout(){
+            const ajax = fetch("/logout/").then(response =>{location.href = "/home"});
+            
+        }
+    </script>{% endblock %}

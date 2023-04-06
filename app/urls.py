@@ -13,4 +13,5 @@ urlpatterns = [
     path("logout/", views.logout),
     path("comment/save/", views.Comment_request.save),
     path("comment/show/", views.Comment_request.show),
+    path("about/", views.about),
 ]

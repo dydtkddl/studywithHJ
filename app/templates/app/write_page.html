@@ -1,64 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>글 작성</title>
+
+{% extends 'app/share.html' %}
+{% block content %}
 	<style>
 		/* 테마 스타일 */
-		body {
-			background-color: #F1F1F1;
-			color: #333;
-			font-family: Arial, sans-serif;
-			font-size: 16px;
-			line-height: 1.5;
-			margin: 0;
-			padding: 0;
-		}
-
-		header {
-			background-color: #4CAF50;
-			color: #FFF;
-			padding: 20px;
-		}
-
-		h1 {
-			margin: 0;
-			font-size: 2.5em;
-			line-height: 1.2;
-		}
-
-		nav {
-			background-color: #2E8B57;
-			color: #FFF;
-			padding: 10px;
-			text-align: center;
-		}
-
-		nav a {
-			color: #FFF;
-			font-weight: bold;
-			margin-right: 10px;
-			text-decoration: none;
-		}
-
-		nav a:hover {
-			text-decoration: underline;
-		}
-
-		.container {
-			margin: 0 auto;
-			max-width: 960px;
-			padding: 20px;
-		}
-
-		.post {
-			background-color: #FFF;
-			border: 1px solid #CCC;
-			border-radius: 5px;
-			margin-bottom: 20px;
-			padding: 20px;
-		}
-
+		
+		
 		.post h2 {
 			margin: 0 0 10px;
 			font-size: 1.8em;
@@ -79,16 +25,7 @@
 			text-decoration: underline;
 		}
 
-		footer {
-			background-color: #333;
-			color: #FFF;
-			padding: 20px;
-			text-align: center;
-		}
-
-		footer p {
-			margin: 0;
-		}
+		
 
 		/* 글 작성 페이지 스타일 */
 		form {
@@ -130,16 +67,6 @@
 			background-color: #2E8B57;
 		}
 	</style>
-</head>
-<body>
-	<header>
-		<h1>Remind Today</h1>
-	</header>
-	<nav>
-		<a href="/home/">Home</a>
-		<a href="#">About</a>
-		<a href="#">Contact</a>
-	</nav>
 	<div class="container">
         {% csrf_token %}
 		<form id="post-form">
@@ -180,5 +107,4 @@
 			}
 		});
 	</script>
-</body>
-</html>
+	{% endblock %}
