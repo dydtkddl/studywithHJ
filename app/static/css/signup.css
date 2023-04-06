@@ -63,25 +63,17 @@ button[type="submit"] {
 }
 
 /* add this section to adjust font size for smaller screens */
-@media only screen and (max-width: 600px) {
-	h1 {
-		font-size: 2em;
-	}
-	
-	input[type="text"], input[type="password"], input[type="email"] {
-		font-size: 14px;
-	}
-	
-	button[type="submit"] {
-		font-size: 14px;
-	}
-	@media screen and (max-width: 768px) {
-		input[type="text"], input[type="password"], input[type="email"] {
-		  width: 100%;
-		  font-size: 50px;
-		}
-		button[type="submit"] {
-		  width: 100%;
-		}
-	  }
+@media screen and (max-width: 700px) {
+    input[type="text"], input[type="password"], input[type="email"], input[type="phone"] {
+        width: 90%; /* 인풋영역을 좀 더 넓게 조절 */
+        font-size: 34px; /* 폰트 크기를 줄임 */
+    }
+}
+
+/* 컴퓨터에서 보여질 스타일 */
+@media screen and (min-width: 700px) {
+    input[type="text"], input[type="password"], input[type="email"], input[type="phone"] {
+        width: 93%; /* 인풋영역을 원래대로 조절 */
+        font-size: 16px; /* 폰트 크기를 원래대로 조절 */
+    }
 }
