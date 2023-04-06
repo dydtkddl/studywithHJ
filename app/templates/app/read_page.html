@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>초록색 느낌의 블로그 테마 - 상세 글 페이지</title>
+	<style>
+		body {
+			background-color: #F1F1F1;
+			color: #333;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+			margin: 0;
+			padding: 0;
+		}
+
+		header {
+			background-color: #4CAF50;
+			color: #FFF;
+			padding: 20px;
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 2.5em;
+			line-height: 1.2;
+		}
+
+		nav {
+			background-color: #2E8B57;
+			color: #FFF;
+			padding: 10px;
+			text-align: center;
+		}
+
+		nav a {
+			color: #FFF;
+			font-weight: bold;
+			margin-right: 10px;
+			text-decoration: none;
+		}
+
+		nav a:hover {
+			text-decoration: underline;
+		}
+
+		.container {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 20px;
+}
+
+		.post {
+			background-color: #FFF;
+			border: 1px solid #CCC;
+			border-radius: 5px;
+			margin-bottom: 20px;
+			padding: 20px;
+		}
+
+		.post h2 {
+			margin: 0 0 10px;
+			font-size: 1.8em;
+			line-height: 1.2;
+		}
+
+		.post p {
+			margin: 0 0 10px;
+		}
+
+		.post a {
+			color: #4CAF50;
+			font-weight: bold;
+			text-decoration: none;
+		}
+
+		.post a:hover {
+			text-decoration: underline;
+		}
+
+		footer {
+			background-color: #333;
+			color: #FFF;
+			padding: 20px;
+			text-align: center;
+		}
+
+		footer p {
+			margin: 0;
+		}
+        .comment-form {
+  margin-top: 30px;
+  max-width: 960px;
+  padding: 20px;
+  background-color: #FFF;
+  border: 1px solid #CCC;
+  border-radius: 5px;
+}
+.comment {
+  background-color: #f0fff0;
+  border: 1px solid #008000;
+  padding: 20px;
+  max-width: 960px;
+  margin : 0 auto ; 
+}
+
+.comment h3 {
+  color: #008000;
+}
+
+#comment-form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+#comment-form input[type="text"], 
+#comment-form textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #008000;
+  background-color: #fff;
+  font-size: 16px;
+  color: #333;
+}
+
+#comment-form textarea {
+  height: 150px;
+}
+
+#comment-form button[type="submit"] {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #008000;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#comment-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  max-width: 960px;
+}
+
+#comment-list li {
+  border: 1px solid #008000;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+  color: #333;
+}
+
+#comment-list li p.author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#comment-list li p.date {
+  font-style: italic;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Remind Today</h1>
+	</header>
+	<nav>
+		<a href="/home/">Home</a>
+		<a href="#">About</a>
+		<a href="#">Contact</a>
+	</nav>
+	<div class="container">
+		<div class="post">
+			<h2>{{title}}</h2>
+			<p>작성일: <span id="post_date">{{date}}</span></p>
+			<p id="post_content">{{content}}</p>
+		</div>
+	</div>
+    <div class="comment">
+        <h3>댓글 작성하기</h3>
+        <form id="comment-form" method="post" action="/comment/save/">
+			{% csrf_token %}
+          <textarea id="comment-content" name="comment" placeholder="댓글 내용" required></textarea>
+          <button type="submit">댓글 작성</button>
+        </form>
+      </div>
+      
+      <div class="comment">
+        <h3>댓글 목록</h3>
+        <ul id="comment-list">
+			
+			
+		</ul>
+      </div>
+	<footer>
+		<p>&copy; 2023 Blog</p>
+	</footer>
+</body>
+<script>
+	const ajax = fetch("/comment/show/").then((res)=>res.json()).then(
+		function(comment_list){console.log(comment_list);
+		let target = document.getElementById("comment-list")
+		let code ="";
+		for (comment of comment_list){ 
+			code += "<div class = 'comment'>";
+		code += `<h4 style = 'margin:0'>${comment["user"]}</h4>`
+		code += `<p style = "margin:2px">${comment["comment"]}</p>`
+		code +='</div>'}
+		
+		target.innerHTML = code;
+	}
+	)
+		</script>
