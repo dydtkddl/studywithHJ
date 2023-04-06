@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views 
 urlpatterns = [
+
     path("home/", views.home),
+    path("/", views.home),
     path("write/", views.write),
     path("save_article_json/", views.save_article_json),
     path("read_article_json/", views.read_article_json),
