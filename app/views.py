@@ -5,7 +5,7 @@ from django.http import HttpResponse,JsonResponse
 from django.shortcuts import render
 import json
 from .models import Article ,User,Comment
-import datetime 
+import datetime
 from django.forms.models import model_to_dict
 from urllib.parse import urlparse, parse_qs
 import time
@@ -14,7 +14,7 @@ def home(request):
         dd = len(User.objects.filter(user_id = request.session["user_id"]))
         print(dd)
         if dd==1:
-            print("home")   
+            print("home")
             return render(request, "app/base.html")
         else:
             print(1)
@@ -49,7 +49,7 @@ def read_article_json(request):
             dic_[i["date"]] = [i]
         else:
             dic_[i["date"]].append(i)
-    dic_["date_list"]=date_list
+    dic_["date_list"]=sorted(date_list, key = lambda x: -int(re.sub("/","",x)))
     return JsonResponse(dic_)
 def read_article(request):
     id = request.GET.get('id')
@@ -65,7 +65,7 @@ def signup(request):
         if len(User.objects.filter(user_id=user_id))>0:
             error = "아이디 중복"
             return render(request, "app/signup.html", {"error":error})
-            
+
         User(user_id = user_id,name =name, password =password, email =email, phone=phone).save()
         return redirect('/home')
     return render(request, "app/signup.html")

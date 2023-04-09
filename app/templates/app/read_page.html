@@ -30,7 +30,7 @@
 		text-decoration: underline;
 	}
 
-	
+
 	.comment-form {
 		margin-top: 30px;
 		max-width: 960px;
@@ -114,7 +114,7 @@
 	<div class="post_">
 		<h2>{{title}}</h2>
 		<p>작성일: <span id="post_date">{{date}}</span></p>
-		<p id="post_content">{{content}}</p>
+		<p id="post_content">{{content|linebreaksbr }}</p>
 	</div>
 </div>
 <div class="comment">
