@@ -1,3 +1,5 @@
+/* 기본 스타일 */
+
 body {
   background-color: #F1F1F1;
   color: #333;
@@ -14,25 +16,8 @@ header {
   padding: 20px;
 }
 
-h1 {
-  margin: 0;
-  font-size: 2.5em;
-  line-height: 1.2;
-}
 
-nav {
-  background-color: #2E8B57;
-  color: #FFF;
-  padding: 10px;
-  text-align: center;
-}
 
-nav a {
-  color: #FFF;
-  font-weight: bold;
-  margin-right: 10px;
-  text-decoration: none;
-}
 
 nav a:hover {
   text-decoration: underline;
@@ -102,13 +87,72 @@ nav a:hover {
   color: #95a5a6;
   font-size: 14px;
 }
-footer {
-		background-color: #333;
-		color: #FFF;
-		padding: 20px;
-		text-align: center;
-	}
 
-	footer p {
-		margin: 0;
-	}
+footer {
+  background-color: #333;
+  color: #FFF;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* 미디어 쿼리 */
+
+@media screen and (max-width: 960px) {
+  .container {
+    padding: 10px;
+  }
+
+  .post {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2.5em;
+    margin: 0;
+    line-height: 1.2;
+    
+  }
+  nav {
+    background-color: #2E8B57;
+    color: #FFF;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav a {
+    color: #FFF;
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: none;
+  }}
+@media screen and (min-width: 600px) {
+  h1 {
+    font-size: 100px;
+    margin: 0;
+    line-height: 1.2;
+
+  }
+  nav {
+    background-color: #2E8B57;
+    color: #FFF;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  nav a {
+    font-size: 25px;
+    color: #FFF;
+    font-weight: bold;
+    margin-right: 10px;
+    text-decoration: none;
+  }
+  .post {
+    width: 100%;
+  }
+}

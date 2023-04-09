@@ -1,26 +1,51 @@
 {% extends 'app/share.html' %}
 {% block content %}
     <style>
-      .button_write {
-  display: inline-block;
-  background-color: #4CAF50;
-  color: white;
-  padding: 8px 16px;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+      
+@media screen and (min-width : 600px){
+    .button_write {
+    width: 80vw;
+    margin : 1px auto;
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 45px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+    }
+
+}
+@media screen and (max-width : 600px){
+    .button_write {
+    width: 500px;
+
+display: inline-block;
+background-color: #4CAF50;
+color: white;
+padding: 8px 16px;
+text-align: center;
+text-decoration: none;
+font-size: 16px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
 }
 
 .button_write:hover {
   background-color: #3e8e41;
 }
+    
     </style>
-    <div style="width:500px;margin:0px auto;margin-top: 20px;">
-      <button style="width: 500px;"class="button_write" onclick="go_write('/write/')">
+    <div style="display:flex;margin-top: 20px;">
+      <button class="button_write" onclick="go_write('/write/')">
         <i class="fa-solid fa-pen-nib"></i> 글 쓰러가기</button></div>
     <div class="container">
         <div class="post_list">
